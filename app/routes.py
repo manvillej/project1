@@ -4,7 +4,7 @@ from app import app
 @app.route("/")
 def index():
     user = {'username':'Jeff'}
-    return render_template('index.html', title='Home', user=user)
+    return render_template('base.html', title='Home', user=user)
 
 @app.route('/login')
 def login():
@@ -25,7 +25,7 @@ def register():
 def search():
     user = {'username':'Jeff'}
     return render_template('index.html', title='search', user=user)
-s
+
 @app.route('/location/<int:zipcode>')
 def location(zipcode):
     user = {'username':'Jeff'}
