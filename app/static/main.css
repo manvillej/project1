@@ -1,0 +1,98 @@
+body main .content-img-text, body main .content-img-list, body main .content-text-table, body main .content-table, body main .content-text-only, body main .content-img, body main .content-post {
+  margin-bottom: 60px;
+  padding: 10px;
+  background-color: #343a40;
+}
+body main .content-img-text div, body main .content-img-list div, body main .content-text-table div, body main .content-table div, body main .content-text-only div, body main .content-img div, body main .content-post div {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+body main .content-img-text div p, body main .content-img-list div p, body main .content-text-table div p, body main .content-table div p, body main .content-text-only div p, body main .content-img div p, body main .content-post div p {
+  color: #fff;
+}
+
+body main .content-text-table table, body main .content-table table {
+  margin: 0px auto;
+}
+
+body {
+  background-color: #212529;
+}
+body header .navbar {
+  padding: 0px;
+}
+body header .navbar .navbar-brand {
+  margin-left: 10px;
+  padding: 0px;
+}
+body header .navbar .navbar-brand #brand {
+  color: #fff;
+}
+body header .navbar .nav {
+  margin-right: 10px;
+}
+body header .navbar .nav .nav-item .nav-link {
+  color: #fff;
+}
+body main {
+  margin-bottom: 40px;
+}
+body main #Title {
+  color: #fff;
+  text-align: center;
+  padding: 30px;
+}
+body main p {
+  text-indent: 50px;
+  margin: 0px;
+}
+body main .content-post h3 {
+  color: #fff;
+}
+body main .content-post .post-meta {
+  color: #ccc;
+}
+body main .content-img {
+  padding: 0px;
+}
+body main .content-img-list {
+  padding: 0px;
+}
+body main .content-img-list .list {
+  text-align: center;
+}
+body main .content-img-list .list ul {
+  margin: 0px;
+  padding: 0px;
+  display: inline-block;
+}
+body main .content-img-list .list .list-group-item {
+  padding: 10px 15px;
+  background-color: #32383e;
+  color: #fff;
+}
+body main .content-img-text {
+  padding: 0px;
+}
+body main .content-img-text p {
+  padding: 10px;
+}
+body footer .navbar {
+  padding: 0px;
+}
+body footer .navbar .nav {
+  margin: 0 auto;
+}
+body footer .navbar .nav .nav-item {
+  margin-right: 10px;
+  margin-left: 10px;
+  text-align: center;
+  width: 80px;
+  font-size: 20px;
+}
+body footer .navbar .nav .nav-item a {
+  color: #fff;
+  text-decoration: none;
+}
+
+/*# sourceMappingURL=main.css.map */
