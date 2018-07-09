@@ -1,0 +1,158 @@
+$font-stack: Helvetica, sans-serif;
+$title-color: #fff;
+$primary-color: #fff;
+$secondary-color: #fff;
+$tertiary-color: #ccc;
+$main-bottom-margin: 30px;
+$background-color: #212529;
+$section-color: #343a40;
+$section-padding: 10px;
+$section-spacing: 60px;
+$title-padding:30px;
+
+
+%bootstrap-content {
+    margin-bottom: $section-spacing;
+    padding:$section-padding;
+    background-color: $section-color;
+    div {
+        padding-left: 0px;
+        padding-right: 0px;        
+        p{  
+            color:$secondary-color;
+        }
+    }
+}
+
+%center-table{
+    table{
+        margin: 0px auto;
+    }
+}
+
+body{
+    header {
+        .navbar {
+            padding: 0px;
+            .navbar-brand {
+                margin-left: 10px;
+                padding:0px;
+                #brand {
+                    img{
+
+                    }
+                    color:$primary-color;
+                }
+            }
+            .nav {
+                margin-right: 10px;
+                .nav-item {
+                    .nav-link {
+                        color:$primary-color;
+                    }
+                }
+            }   
+        }
+    }
+    background-color: $background-color;
+    main {
+        margin-bottom: 40px;
+        #Title{
+            color:$title-color;
+            text-align: center;
+            padding:$title-padding;
+        }
+
+        p {
+            text-indent: 50px;
+            margin:0px;
+        }
+        .content-post {
+            @extend %bootstrap-content;
+            h3{
+                color:$primary-color;
+            }
+            .post-meta{
+                color:$tertiary-color;
+            }
+        }
+
+        .content-img {
+            @extend %bootstrap-content;
+            padding: 0px;
+        }
+
+        .content-text-only {
+            @extend %bootstrap-content;
+        }
+
+        .content-table {
+            @extend %bootstrap-content;
+            @extend %center-table;
+        }
+
+        .content-text-table {
+            @extend %bootstrap-content;
+            @extend %center-table;
+        }
+
+        .content-img-list {
+            @extend %bootstrap-content;
+            padding: 0px;
+            .list {
+                text-align: center;
+                ul {
+                    margin: 0px;
+                    padding: 0px;
+                    display:inline-block;
+                }
+                .list-group-item {
+                    padding: 10px 15px;
+                    background-color: #32383e;
+                    color: #fff;
+                }
+            }
+        } 
+
+        .content-img-text {
+            @extend %bootstrap-content;
+            padding: 0px;
+            p{
+                padding: 10px;
+            }
+        }
+    }
+    footer {
+        .navbar {
+            padding:0px;
+            .nav {
+                margin: 0 auto;
+                .nav-item {
+                    margin-right:10px; 
+                    margin-left:10px;
+                    text-align: center;
+                    width:80px;
+                    font-size: 20px;
+                    a {
+                        color:$secondary-color;
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media print { 
+ /* All your print styles go here */
+ #header, #footer, #nav { display: none !important; }
+}
+
+
+
+
+
+
+
+
+

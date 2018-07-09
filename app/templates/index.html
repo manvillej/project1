@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% include '_title.html' %}
+    <div class="row content-post">
+        <div class="col-sm">
+            <h3>Project 0</h3>
+            <span class="post-meta">By Jeff Manville - 7/3/2018</span>
+            <p> 
+                For this project, I satisfied all the technical requirements, but I wasn't sure what to do content wise. I decided the boiler plate biography would be a good place to start. Structure wise, there are 4 pages: an index, past, present, and future. I also have links to my twitter, the repo for the project, and my github profile from every page.
+            </p>
+        </div>
+    </div>
+    <div class="row content-text-only">
+        <div class="col-sm">
+            <p>
+                I am proud of this. This is the first static page I've made that I would say looks good. I designed it in such a way that it could be compatible with the Jinja2 templating in Flask. Thinking of the system as individual modular parts changed how I thought about constructing the UI. I designed the UI that parts could be moved around, copied, and replaced. I think later on once we do the integrate Flask and a back end, I will be able to create my own (local) blog. I am not sure how to host yet, but I already see the parts falling together. 
+            </p>
+        </div>
+    </div>
+    <div class="row content-text-table"> 
+        <div class="col-sm-12 col-md-6">
+            <p> FYI, the tables, lists, and images are all filler data. I needed them for the requirements and I liked styling them, but I didn't have any content for them.</p>
+        </div>
+        <div class="col-sm-12 col-md-6">
+            <table class="table table-dark table-hover table-sm">
+                <thead class="thead-dark"> 
+                    <tr>  
+                        <th>One</th>
+                        <th>Two</th>
+                        <th>Three</th>
+                    </tr>
+                </thead>
+                <tr>
+                    <td>Apples</td>
+                    <td>Carrots</td>
+                    <td>Steak</td>
+                </tr>
+                <tr>
+                    <td>Oranges</td>
+                    <td>Potato</td>
+                    <td>Pork</td>
+                </tr>
+                <tr>
+                    <td>Pears</td>
+                    <td>Peas</td>
+                    <td>Chicken</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row content-table"> 
+        <div class="col-sm">
+            <table class="table table-dark table-hover table-sm">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>One</th>
+                        <th>Two</th>
+                        <th>Three</th>
+                    </tr>
+                </thead>
+                <tr>  
+                    <td>Apples</td>
+                    <td>Carrots</td>
+                    <td>Steak</td>
+                </tr>  
+                <tr>  
+                    <td>Oranges</td>
+                    <td>Potato</td>
+                    <td>Pork</td>
+                </tr>  
+                <tr>  
+                    <td>Pears</td>
+                    <td>Peas</td>
+                    <td>Chicken</td>
+                </tr>  
+            </table>
+        </div>
+    </div>
+    <div class="row content-img-list">
+        <div class="col-sm-6 col-md-6">
+            <img src="http://placekitten.com/400/200" class="img-fluid mx-auto d-block">
+        </div>
+        <div class="col-sm-6 col-md-6 list">      
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">one item</li>
+                <li class="list-group-item">another</li>
+                <li class="list-group-item">one more</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row content-img-text">
+        <div class="col-sm-12 col-md-6">
+            <img src="http://placekitten.com/800/400" class="img-fluid mx-auto d-block">
+        </div>
+        <div class="col-sm-12 col-md-6">
+            <p> Seriously, There's nothing here. Why are you even reading this? You really don't have to. </p>
+        </div>
+    </div>
+{% endblock %}
