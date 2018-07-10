@@ -1,13 +1,12 @@
 from flask import Flask
 from config import Config, site_config
-from sqlalchemy import create_engine
-from sqlalchemy.orm import scoped_session, sessionmaker
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 import os
 
 app = Flask(__name__)
 app.config.from_object(Config)
-engine = create_engine(os.getenv("DATABASE_URL"))
-db = scoped_session(sessionmaker(bind=engine))
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
-
-from app import routes
+from app import routes, models
