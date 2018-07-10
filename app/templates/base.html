@@ -22,9 +22,18 @@
         <header>
             {% include '_header.html' %}
         </header>
-
+        
         <main>
             <div class="container">
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                {% for message in messages %}
+                    {% include '_alert.html' %}
+                {% endfor %}
+                {% endif %}
+                {% endwith %}  
+                {% include '_title.html' %}
+
                 {% block content %} {% endblock %}
             </div>
         </main>
