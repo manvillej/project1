@@ -22,3 +22,17 @@ class User(UserMixin, db.Model):
 @login.user_loader
 def load_user(id):
 	return User.query.get(int(id))
+
+
+class Location(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    zipcode = db.Column(db.String(32), index=True, unique=True)
+    city = db.Column(db.String(64), index=True)
+    state = db.Column(db.String(16), index=True)
+    latitude = db.Column(db.Float)
+    longitude = db.Column(db.Float)
+    population = db.Column(db.Integer)
+
+    def __repr__(self):
+        return f'<Location - ({self.longitude}, {self.latitude}), ({self.city}, {self.state} {self.zipcode})>'.format()
+
