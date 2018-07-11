@@ -44,8 +44,8 @@ class RegistrationForm(FlaskForm):
 
 
 class SearchForm(FlaskForm):
-    zipcode = StringField('zipcode')
-    city = StringField('city')
-    state = StringField('zipcode')
+    zipcode = StringField('Zipcode')
+    city = StringField('City')
+    state = StringField('State')
 
     submit = SubmitField('Sign In')

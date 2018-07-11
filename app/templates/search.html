@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+zipcode
+city
+state
+submit
+{% block content %}
+    <div class="row">
+        <div class="col-sm content-text-only">
+            <form action="" method="post">
+                {{ form.hidden_tag() }}
+                <p>
+                    {{ form.zipcode.label }}<br>
+                    {{ form.zipcode(size=32) }}<br>
+                    {% for error in form.zipcode.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+                <p>
+                    {{ form.city.label }}<br>
+                    {{ form.city(size=32) }}<br>
+                    {% for error in form.city.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+                <p>
+                    {{ form.state.label }}<br>
+                    {{ form.state(size=32) }}<br>
+                    {% for error in form.state.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+                <p>{{ form.submit() }}</p>
+            </form>
+        </div>
+    </div>
+{% endblock %}
