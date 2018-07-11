@@ -1,4 +1,10 @@
-<h1 id="Title">Hello, {{ user.username }}! - {{ title}}</h1>
+<h1 id="Title">
+    {% if current_user.is_anonymous %}
+		Hello! - {{ title}}
+	{% else %}
+		Hello, {{ current_user.username }}! - {{ title}}
+	{% endif %}
+</h1>
 <div class="row content-img">
     <div class="col-md-12">
         <img src="http://placekitten.com/1200/400" class="img-fluid">

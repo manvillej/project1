@@ -9,7 +9,6 @@ class Config(object):
 
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'
 
-
     if not os.getenv("DATABASE_URL"):
         raise RuntimeError("DATABASE_URL is not set")
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
