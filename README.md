@@ -9,23 +9,40 @@ For this proejct, I relied a lot from two major resources. I reused much of the 
 I based my app file structure off of his because I could easily turn it into an installable package by adding a setup.py. I used Flask-Migrate from his examples to help with database creation and modification. I made several mistakes when creating and modifying the database and it was extremely helpful in rolling back those mistakes. I also liked using the 'flask shell' feature to test the data model layer. 
 
 ### Top Level Directory:
+
 /app/ - Most of the application
+
 /migrations/ - db migration files
+
 .gitignore
+
 README.md
-/config.py - holds the CONFIG object and site_config named tuple for branding
+
+/config.py - holds the CONFIG object and site_config namedtuple for branding
+
 /import.py - import py for loading zips.csv into location table
+
 /application.py - application
+
+
 /requirements.txt - I use my laptop and Anaconda. so this file is anaconda's output
+
 /zips.csv
+
 
 ### /app/ Directory
 ./templates/ - where html is stored
+
 ./static/ - where my scss and css is stored
-.//_/_init/_/_.py - defines the base importable stuff, app, some login properties, some db stuff
+
+./__init__.py - defines the base importable stuff, app, some login properties, some db stuff
+
 ./routes.py - defines the routes in the application. It also has some utility functions that routes use. This isn't the most sustainable practice and in the future, I think I would have another directory with a file for each route and its utility functions that gets imported into routes.py
+
 ./forms.py - WTForms are defined here
+
 ./models.py - DB models are defined here
+
 ./siteConfig.py - SiteConfig named tuple is defined here for import.
 
 
