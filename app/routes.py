@@ -117,15 +117,20 @@ def location(zipcode):
     location = Location.query.filter_by(zipcode=str(zipcode))[0]
 
     if form.validate_on_submit():
-        existing_comment = CheckIn.query.filter_by(location_id=location.id, user_id=current_user.id)
+        existing_comment = CheckIn.query.filter_by(
+            location_id=location.id, 
+            user_id=current_user.id)
+
         if existing_comment.count()==0:
             checkin = CheckIn(
                 user_id=current_user.id, 
                 location_id=location.id, 
                 body=form.comment.data)
+
             db.session.add(checkin)
             db.session.commit()
             flash('Check in submitted!')
+            
         else:
             flash('You already checked in here!')
 
@@ -191,7 +196,7 @@ def get_message(location, data, visits):
     location_summary = location_summary + f'{location.longitude} '
     location_summary = location_summary + f'(Lat, Long). '
 
-    time = get_local_time(data["timezone"],data["currently"]["time"])
+    time = get_local_time(data["timezone"], data["currently"]["time"])
     location_summary = location_summary + f'Currently ({time}), '
 
     location_summary = location_summary + get_weather_text(
