@@ -3,7 +3,7 @@
 Web Programming with Python and JavaScript
 
 ## Project Summary
-For this project, I relied a lot on two major resources. I reused most of my the html and css from https://github.com/manvillej/project0 and I also heavily relied on Miguel Grinberg's FlaskMega tutorial https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world. I really like Grinberg's tutorial because it is highly digestable, isn't a toy example, and attempts to be scalable and well structured from the beginning. I was able to adapt it many parts of it to my project and fill in the gaps from documentation, stack overflow, and reddit (r/python and r/flask)
+For this project, I relied a lot on two major resources. I reused most of my the html and css from https://github.com/manvillej/project0 and I also heavily relied on Miguel Grinberg's FlaskMega tutorial https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world. I really like Grinberg's tutorial because it is highly digestable, isn't a toy example, and attempts to be scalable and well structured from the beginning. I was able to adapt many parts of it to my project and fill in the gaps from documentation, stack overflow, and reddit (r/python and r/flask)
 
 ### Top Level Directory:
 
