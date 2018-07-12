@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="row content-text-only">
+        <div class="col-sm">
+            <p>
+                {{location_summary}}
+            </p>
+        </div>
+    </div>
+    
+    {% include '_check_in_form.html'%}
+
+    {% for checkin in checkins %}
+        {% include '_check_in.html' %}
+    {% endfor %}
+
+{% endblock %}

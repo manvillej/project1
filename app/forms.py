@@ -1,18 +1,17 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms.widgets import TextArea
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo
 from app.models import User
 
 
 class LoginForm(FlaskForm):
     username = StringField(
-    	'Username', 
-    	validators=[DataRequired()])
-
+        'Username', 
+        validators=[DataRequired()])
     password = PasswordField(
-    	'Password', 
-    	validators=[DataRequired()])
-
+        'Password', 
+        validators=[DataRequired()])
     remember_me = BooleanField('Remember Me')
 
     submit = SubmitField('Sign In')
@@ -20,17 +19,14 @@ class LoginForm(FlaskForm):
 
 class RegistrationForm(FlaskForm):
     username = StringField(
-    	'Username', 
-    	validators=[DataRequired()])
-
+        'Username', 
+        validators=[DataRequired()])
     email = StringField(
-    	'Email', 
-    	validators=[DataRequired(), Email()])
-
+        'Email', 
+        validators=[DataRequired(), Email()])
     password = PasswordField(
-    	'Password', 
-    	validators=[DataRequired()])
-
+        'Password', 
+        validators=[DataRequired()])
     password2 = PasswordField(
         'Repeat Password', 
         validators=[DataRequired(), EqualTo('password')])
@@ -46,3 +42,17 @@ class RegistrationForm(FlaskForm):
         user = User.query.filter_by(email=email.data).first()
         if user is not None:
             raise ValidationError('Please use a different email address.')
+
+
+class SearchForm(FlaskForm):
+    zipcode = StringField('Zipcode')
+    city = StringField('City')
+    state = StringField('State')
+
+    submit = SubmitField('Search')
+
+
+class CheckInForm(FlaskForm):
+    comment = StringField('Comment', widget=TextArea())
+
+    submit = SubmitField('Check In')
