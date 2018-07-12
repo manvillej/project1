@@ -1,5 +1,5 @@
 from flask import render_template, flash, redirect, url_for, request, jsonify
-from app import app, db, site_config, API_KEY
+from app import app, db, site_config, Config
 from app.forms import LoginForm, RegistrationForm, SearchForm, CheckInForm
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, Location, CheckIn
@@ -210,8 +210,6 @@ def get_weather_text(summary, temperature, dewPoint, humidity):
     weather = weather + f'and a humidity of {100*humidity: .1f} percent. '
     return weather
 
-    # textual weather summary (e.g. “Clear”), temperature, dew point, and humidity (as a percentage).
-
 def get_local_time(timezone, epoch_time):
     utc_dt = datetime.utcfromtimestamp(epoch_time).replace(tzinfo=pytz.utc)
     tz = pytz.timezone(timezone)
@@ -220,7 +218,7 @@ def get_local_time(timezone, epoch_time):
     return local_dt.strftime('%H:%M:%S %Z%z')
 
 def get_weather_data(latitude, longitude):
-    url = f'https://api.darksky.net/forecast/{API_KEY}'
+    url = f'https://api.darksky.net/forecast/{Config.API_KEY}'
     url = url + f'/{latitude},{longitude}'
     response = requests.get(url)
     return response.json()

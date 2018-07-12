@@ -13,8 +13,8 @@ class Config(object):
         raise RuntimeError("DATABASE_URL is not set")
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-
-API_KEY = os.environ.get('API_KEY') or 'you-will-never-guess'
+    
+    API_KEY = os.environ.get('API_KEY') or 'you-will-never-guess'
 
 
 site_config = SiteConfig(
