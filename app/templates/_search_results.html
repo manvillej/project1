@@ -1,0 +1,5 @@
+{% if locations.count()>0 %}
+    {% include '_search_table.html' %}
+{% else %}
+    {% include '_no_search_results.html' %}
+{% endif %}

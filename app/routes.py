@@ -76,27 +76,28 @@ def register():
 @login_required
 def search():
     form = SearchForm()
+    template = 'search.html'
 
     if form.validate_on_submit():
         if(form.zipcode.data is "" and form.city.data is "" and form.state.data is ""):
-            flash('Please enter some search criteria')
+            flash('Please fill in a field to search')
             return render_template(
-                'search.html',
+                template,
                 title='search',
                 config=site_config,
                 form=form)
 
-        locations = Location.query.filter_by(zipcode=form.zipcode.data)
-        flash(f'zipcode={locations[0].zipcode}, city={locations[0].city}, state={locations[0].state}')
+        locations = search_locations(form)
+
         return render_template(
-            'search.html',
+            template,
             title='search',
             config=site_config,
             form=form,
             locations=locations)
 
     return render_template(
-        'search.html',
+        template,
         title='search',
         config=site_config,
         form=form)
@@ -122,3 +123,20 @@ def api(zipcode):
         config=site_config,
         user=user)
 
+
+def search_locations(form):
+    filter_query = {
+        "zipcode":form.zipcode.data,
+        "city":form.city.data,
+        "state":form.state.data,
+    }
+
+    if form.zipcode.data is "":
+        filter_query.pop("zipcode")
+    if form.city.data is "":
+        filter_query.pop("city")
+    if form.state.data is "":
+        filter_query.pop("state")
+
+    locations = Location.query.filter_by(**filter_query).limit(20)
+    return locations
