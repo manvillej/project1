@@ -4,6 +4,8 @@ from app.forms import LoginForm, RegistrationForm, SearchForm
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, Location
 from werkzeug.urls import url_parse
+from datetime import datetime
+import pytz
 
 
 @app.route("/")
@@ -18,6 +20,7 @@ def index():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    template = 'login.html'
     if current_user.is_authenticated:
         return redirect(url_for('index'))
 
@@ -39,8 +42,8 @@ def login():
         return redirect(next_page)
 
     return render_template(
-        'login.html', 
-        title='login', 
+        template, 
+        title='Login', 
         config=site_config, 
         form=form)
 
@@ -106,12 +109,15 @@ def search():
 @app.route('/location/<int:zipcode>')
 @login_required
 def location(zipcode):
-    user = {'username':'Jeff'}
+    template = "location.html"
+    location = Location.query.filter_by(zipcode=str(zipcode))
+    flash(location[0])
+    location_summary = get_message(location[0], "blah", 100)
     return render_template(
-        'index.html',
-        title='location',
+        template,
+        title='Location',
         config=site_config,
-        user=user)
+        location_summary=location_summary)
 
 
 @app.route('/api/<int:zipcode>')
@@ -140,3 +146,37 @@ def search_locations(form):
 
     locations = Location.query.filter_by(**filter_query).limit(20)
     return locations
+
+def get_message(location, dark_sky_data, visits):
+    location_summary = f'Hello {current_user.username}! '
+
+    location_summary = location_summary + f'Welcome to {location.city.title()}, '
+    location_summary = location_summary + f'{location.state} {location.zipcode}! '
+    location_summary = location_summary + f'All {location.population} of us reside here. '
+    location_summary = location_summary + f'If you are looking on GPS, '
+    location_summary = location_summary + f'you can find us at '
+    location_summary = location_summary + f'{location.latitude}, '
+    location_summary = location_summary + f'{location.longitude} '
+    location_summary = location_summary + f'(Lat, Long). '
+
+    time = get_local_time("America/New_York",1509993277)
+    location_summary = location_summary + f'Currently ({time}), '
+    location_summary = location_summary + get_weather('Drizzle', 100, 60.1, .83)
+    location_summary = location_summary + f'{visits} other users have checked in here. '
+
+    return location_summary
+
+def get_weather(summary, temperature, dewPoint, humidity):
+    weather = f'there is a {summary}. It is {temperature} '
+    weather = weather + f'degrees out with a dew point of {dewPoint} '
+    weather = weather + f'and a humidity of {100*humidity: .1f} percent. '
+    return weather
+
+    # textual weather summary (e.g. “Clear”), temperature, dew point, and humidity (as a percentage).
+
+def get_local_time(timezone, epoch_time):
+    utc_dt = datetime.utcfromtimestamp(epoch_time).replace(tzinfo=pytz.utc)
+    tz = pytz.timezone(timezone)
+    local_dt = utc_dt.astimezone(tz)
+
+    return local_dt.strftime('%H:%M:%S %Z%z')

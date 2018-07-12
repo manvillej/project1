@@ -1,9 +1,5 @@
 <h1 id="Title">
-    {% if current_user.is_anonymous %}
-		Hello! - {{ title}}
-	{% else %}
-		Hello, {{ current_user.username }}! - {{ title}}
-	{% endif %}
+    {{ title}}
 </h1>
 <div class="row content-img">
     <div class="col-md-12">
