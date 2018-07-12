@@ -1,11 +1,12 @@
 from flask import render_template, flash, redirect, url_for, request
-from app import app, db, site_config
+from app import app, db, site_config, API_KEY
 from app.forms import LoginForm, RegistrationForm, SearchForm
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, Location
 from werkzeug.urls import url_parse
 from datetime import datetime
 import pytz
+import requests
 
 
 @app.route("/")
@@ -110,9 +111,12 @@ def search():
 @login_required
 def location(zipcode):
     template = "location.html"
-    location = Location.query.filter_by(zipcode=str(zipcode))
-    flash(location[0])
-    location_summary = get_message(location[0], "blah", 100)
+    location = Location.query.filter_by(zipcode=str(zipcode))[0]
+
+    data = get_weather_data(location.latitude, location.longitude)
+
+    location_summary = get_message(location, data, 100)
+
     return render_template(
         template,
         title='Location',
@@ -147,26 +151,33 @@ def search_locations(form):
     locations = Location.query.filter_by(**filter_query).limit(20)
     return locations
 
-def get_message(location, dark_sky_data, visits):
+def get_message(location, data, visits):
     location_summary = f'Hello {current_user.username}! '
 
     location_summary = location_summary + f'Welcome to {location.city.title()}, '
     location_summary = location_summary + f'{location.state} {location.zipcode}! '
-    location_summary = location_summary + f'All {location.population} of us reside here. '
+    location_summary = location_summary + f'There are {location.population} '
+    location_summary = location_summary + f'individuals living here. '
     location_summary = location_summary + f'If you are looking on GPS, '
     location_summary = location_summary + f'you can find us at '
     location_summary = location_summary + f'{location.latitude}, '
     location_summary = location_summary + f'{location.longitude} '
     location_summary = location_summary + f'(Lat, Long). '
 
-    time = get_local_time("America/New_York",1509993277)
+    time = get_local_time(data["timezone"],data["currently"]["time"])
     location_summary = location_summary + f'Currently ({time}), '
-    location_summary = location_summary + get_weather('Drizzle', 100, 60.1, .83)
+
+    location_summary = location_summary + get_weather_text(
+        data["currently"]["summary"], 
+        data["currently"]["temperature"], 
+        data["currently"]["dewPoint"], 
+        data["currently"]["humidity"])
+
     location_summary = location_summary + f'{visits} other users have checked in here. '
 
     return location_summary
 
-def get_weather(summary, temperature, dewPoint, humidity):
+def get_weather_text(summary, temperature, dewPoint, humidity):
     weather = f'there is a {summary}. It is {temperature} '
     weather = weather + f'degrees out with a dew point of {dewPoint} '
     weather = weather + f'and a humidity of {100*humidity: .1f} percent. '
@@ -180,3 +191,9 @@ def get_local_time(timezone, epoch_time):
     local_dt = utc_dt.astimezone(tz)
 
     return local_dt.strftime('%H:%M:%S %Z%z')
+
+def get_weather_data(latitude, longitude):
+    url = f'https://api.darksky.net/forecast/{API_KEY}'
+    url = url + f'/{latitude},{longitude}'
+    response = requests.get(url)
+    return response.json()
