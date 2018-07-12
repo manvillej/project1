@@ -51,6 +51,7 @@ README.md
 - add auth to /api/<zipcode> route. Currently it isn't set up to handle basic auth. I'd like to fix that. P1
 - ImportError Handling for site_config, so there is always a fallback. P1
 - Rate limiting APIs using a custom decorator. http://exploreflask.com/en/latest/views.html#custom-decorators
+- Move Config.py into package directory, add documentation for environment variables to handle configurations
 
 I should put these in the issues, but I don't know if I'll ever really need to work with this project again.
 
