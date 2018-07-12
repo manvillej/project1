@@ -1,14 +1,14 @@
 body main .content-img-text, body main .content-img-list, body main .content-text-table, body main .content-table, body main .content-text-only, body main .content-img, body main .content-post {
   margin-bottom: 60px;
   padding: 10px;
-  background-color: #343a40;
+  background-color: #686868;
 }
 body main .content-img-text div, body main .content-img-list div, body main .content-text-table div, body main .content-table div, body main .content-text-only div, body main .content-img div, body main .content-post div {
   padding-left: 0px;
   padding-right: 0px;
 }
 body main .content-img-text div p, body main .content-img-list div p, body main .content-text-table div p, body main .content-table div p, body main .content-text-only div p, body main .content-img div p, body main .content-post div p {
-  color: #fff;
+  color: #AAA;
 }
 
 body main .content-text-table table, body main .content-table table {
@@ -16,7 +16,7 @@ body main .content-text-table table, body main .content-table table {
 }
 
 body {
-  background-color: #212529;
+  background-color: #dbedff;
 }
 body header .navbar {
   padding: 0px;
@@ -26,19 +26,19 @@ body header .navbar .navbar-brand {
   padding: 0px;
 }
 body header .navbar .navbar-brand #brand {
-  color: #fff;
+  color: #AAA;
 }
 body header .navbar .nav {
   margin-right: 10px;
 }
 body header .navbar .nav .nav-item .nav-link {
-  color: #fff;
+  color: #AAA;
 }
 body main {
   margin-bottom: 40px;
 }
 body main #Title {
-  color: #fff;
+  color: #000;
   text-align: center;
   padding: 30px;
 }
@@ -47,10 +47,10 @@ body main p {
   margin: 0px;
 }
 body main .content-post h3 {
-  color: #fff;
+  color: #AAA;
 }
 body main .content-post .post-meta {
-  color: #ccc;
+  color: #AAA;
 }
 body main .content-img {
   padding: 0px;
@@ -91,8 +91,15 @@ body footer .navbar .nav .nav-item {
   font-size: 20px;
 }
 body footer .navbar .nav .nav-item a {
-  color: #fff;
+  color: #AAA;
   text-decoration: none;
+}
+
+@media print {
+  /* All your print styles go here */
+  #header, #footer, #nav {
+    display: none !important;
+  }
 }
 
 /*# sourceMappingURL=main.css.map */
