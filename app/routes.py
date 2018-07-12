@@ -2,7 +2,7 @@ from flask import render_template, flash, redirect, url_for, request
 from app import app, db, site_config
 from app.forms import LoginForm, RegistrationForm, SearchForm
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User
+from app.models import User, Location
 from werkzeug.urls import url_parse
 
 
@@ -76,6 +76,25 @@ def register():
 @login_required
 def search():
     form = SearchForm()
+
+    if form.validate_on_submit():
+        if(form.zipcode.data is "" and form.city.data is "" and form.state.data is ""):
+            flash('Please enter some search criteria')
+            return render_template(
+                'search.html',
+                title='search',
+                config=site_config,
+                form=form)
+
+        locations = Location.query.filter_by(zipcode=form.zipcode.data)
+        flash(f'zipcode={locations[0].zipcode}, city={locations[0].city}, state={locations[0].state}')
+        return render_template(
+            'search.html',
+            title='search',
+            config=site_config,
+            form=form,
+            locations=locations)
+
     return render_template(
         'search.html',
         title='search',

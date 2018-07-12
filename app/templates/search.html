@@ -33,4 +33,8 @@ submit
             </form>
         </div>
     </div>
+
+    {% if locations %}
+        {% include '_search_table.html' %}
+    {% endif %}
 {% endblock %}

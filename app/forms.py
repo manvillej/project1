@@ -48,4 +48,4 @@ class SearchForm(FlaskForm):
     city = StringField('City')
     state = StringField('State')
 
-    submit = SubmitField('Sign In')
+    submit = SubmitField('Search')
