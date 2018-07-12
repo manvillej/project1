@@ -10,7 +10,7 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
-    checkins = db.relationship("User", backref="CheckIn", lazy=True)
+    checkins = db.relationship("CheckIn", backref='author', lazy=True)
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -34,7 +34,7 @@ class Location(db.Model):
     latitude = db.Column(db.Float)
     longitude = db.Column(db.Float)
     population = db.Column(db.Integer)
-    checkins = db.relationship("Location", backref="CheckIn", lazy=True)
+    checkins = db.relationship("CheckIn", backref="location", lazy=True)
 
     def __repr__(self):
         return f'<Location - ({self.longitude}, {self.latitude}), ({self.city}, {self.state} {self.zipcode})>'.format()

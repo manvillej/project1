@@ -1,8 +1,8 @@
-"""CheckIn table
+"""CheckIN table
 
-Revision ID: 5507bc33f51b
+Revision ID: cb4154f81a62
 Revises: ef1243fd82d6
-Create Date: 2018-07-12 02:25:36.033783
+Create Date: 2018-07-12 02:51:24.971135
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '5507bc33f51b'
+revision = 'cb4154f81a62'
 down_revision = 'ef1243fd82d6'
 branch_labels = None
 depends_on = None

@@ -8,13 +8,11 @@
             </p>
         </div>
     </div>
-    <div class="row content-post">
-        <div class="col-sm">
-            <h3>Project 0</h3>
-            <span class="post-meta">By Jeff Manville - 7/3/2018</span>
-            <p> 
-                For this project, I satisfied all the technical requirements, but I wasn't sure what to do content wise. I decided the boiler plate biography would be a good place to start. Structure wise, there are 4 pages: an index, past, present, and future. I also have links to my twitter, the repo for the project, and my github profile from every page.
-            </p>
-        </div>
-    </div>
+    
+    {% include '_check_in_form.html'%}
+
+    {% for checkin in checkins %}
+        {% include '_check_in.html' %}
+    {% endfor %}
+
 {% endblock %}

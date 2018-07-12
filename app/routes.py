@@ -1,8 +1,8 @@
-from flask import render_template, flash, redirect, url_for, request
+from flask import render_template, flash, redirect, url_for, request, jsonify
 from app import app, db, site_config, API_KEY
-from app.forms import LoginForm, RegistrationForm, SearchForm
+from app.forms import LoginForm, RegistrationForm, SearchForm, CheckInForm
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User, Location
+from app.models import User, Location, CheckIn
 from werkzeug.urls import url_parse
 from datetime import datetime
 import pytz
@@ -13,8 +13,9 @@ import requests
 @app.route("/index")
 @login_required
 def index():
+    template = 'index.html'
     return render_template(
-        'index.html',
+        template,
         title='Home',
         config=site_config)
 
@@ -107,31 +108,57 @@ def search():
         form=form)
 
 
-@app.route('/location/<int:zipcode>')
+@app.route('/location/<int:zipcode>', methods=['GET', 'POST'])
 @login_required
 def location(zipcode):
     template = "location.html"
+    form = CheckInForm()
+
     location = Location.query.filter_by(zipcode=str(zipcode))[0]
 
-    data = get_weather_data(location.latitude, location.longitude)
+    if form.validate_on_submit():
+        existing_comment = CheckIn.query.filter_by(location_id=location.id, user_id=current_user.id)
+        if existing_comment.count()==0:
+            checkin = CheckIn(
+                user_id=current_user.id, 
+                location_id=location.id, 
+                body=form.comment.data)
+            db.session.add(checkin)
+            db.session.commit()
+            flash('Check in submitted!')
+        else:
+            flash('You already checked in here!')
 
-    location_summary = get_message(location, data, 100)
+    data = get_weather_data(location.latitude, location.longitude)
+    checkins = CheckIn.query.filter_by(location_id=location.id)
+    location_summary = get_message(location, data, checkins.count())
 
     return render_template(
         template,
         title='Location',
+        form=form,
         config=site_config,
-        location_summary=location_summary)
+        location_summary=location_summary,
+        checkins=checkins)
 
 
 @app.route('/api/<int:zipcode>')
 def api(zipcode):
-    user = {'username':'Jeff'}
-    return render_template(
-        'index.html',
-        title='api',
-        config=site_config,
-        user=user)
+    location = Location.query.filter_by(zipcode=str(zipcode)).first_or_404()
+
+    checkins = CheckIn.query.filter_by(location_id=location.id)
+
+    response = {
+        "place_name": location.city,
+        "state": location.state,
+        "latitude": location.latitude,
+        "longitude": location.longitude,
+        "zip": location.zipcode,
+        "population": location.zipcode,
+        "check_ins": checkins.count()
+    }
+
+    return jsonify(**response)
 
 
 def search_locations(form):
