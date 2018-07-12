@@ -35,7 +35,7 @@ README.md
 
 ./static/ - where my scss and css is stored
 
-./__init__.py - defines the base importable stuff, app, some login properties, some db stuff
+./\_\_init\_\_.py - defines the base importable stuff, app, some login properties, some db stuff
 
 ./routes.py - defines the routes in the application. It also has some utility functions that routes use. This isn't the most sustainable practice and in the future, I think I would have another directory with a file for each route and its utility functions that gets imported into routes.py
 
