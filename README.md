@@ -31,9 +31,9 @@ README.md
 
 
 ### /app/ Directory
-./templates/ - where html is stored
+./templates/ - where html files are stored
 
-./static/ - where my scss and css is stored
+./static/ - where my scss and css files are stored
 
 ./\_\_init\_\_.py - defines the base importable stuff, app, some login properties, some db stuff
 
