@@ -8,7 +8,6 @@ def main():
     with open(file_name, newline='') as csvfile:
         reader = csv.DictReader(csvfile)
 
-        # substract 1 for header
         total = sum([1 for row in reader])
 
         csvfile.seek(0)
